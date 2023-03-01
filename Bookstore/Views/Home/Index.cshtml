@@ -1,0 +1,48 @@
+﻿@{
+}
+
+@model BooksViewModel
+<!--Was this with the atModel above IQueryable<Book> -->
+<!--for above, see the name of the Model Book
+    Also, above was List; then when we changed things in video 2 2nd day,
+    added iQueryable so we can sort in the HomeController with queries-->
+<h1>Hello to index page!</h1>
+
+<!--below changed from just Model to Model.Books. Books is referring to the BookViewModel page-->
+
+
+
+
+@foreach (Book b in Model.Books)
+{
+    <div class="card card-outline-primary m-1 p-1">
+        <h3>
+            @b.Title
+            <span class="badge badge-pill badge-primary bg-dark" style="float:right">
+                Price: @b.Price
+            </span>
+        </h3>
+    </div>
+
+    <ul>
+        <li>Author: @b.Author</li>
+        <li>Publisher: @b.Publisher</li>
+        <li>ISBN: @b.Isbn</li>
+        <li>Classification: @b.Classification</li>
+        <li>Category: @b.Category</li>
+        <li>Page Count: @b.PageCount pages</li>
+    </ul>
+    <br />
+}
+<div page-blah="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group pull-right m-1">
+</div> <!--the page-blah is attribute. Get info from PageInfo Model. See PaginationTagHelper-->
+
+
+<!--<div page-blah="atModel.PageInfo" page-action="Index"> </div> -->
+<!---
+    <a asp-action="Index" asp-route-pageNum="1">1</a>-->
+<!--pass to the Index controller a pageNum of 1 in the URL-->
+<!---<a asp-action="Index" asp-route-pageNum="2">2</a>
+<a asp-action="Index" asp-route-pageNum="3">3</a>-->
