@@ -1,0 +1,29 @@
+﻿@{
+}
+
+@model IEnumerable<string>
+<!--passed from model. This puts data in format that can enumerate through; use type string-->
+
+<div class="d-grid gap-2">
+    <a asp-controller="Home" asp-action="Index" asp-route-bookCategory="" asp-route-pageNum="1" class="btn btn-outline-secondary">Home</a> <!--button to get home again-->
+
+    @foreach (string b in Model) //we'll call it b because books in the Model
+    {   //we're building links; determined in HomeController; action is Index bc that's the page
+        //that we're listing this data on; need to know the book categories
+        <a asp-controller="Home" asp-action="Index" asp-route-bookCategory="@b" asp-route-pageNum="1"
+           class="btn @(ViewBag.SelectedCategory == b ? "btn-primary" : "btn-outline-secondary")">@b</a>
+        //it'll be a button. If selected, then(?) butn-primary; else, be btn-outline-secondary
+    }
+</div>
+<!--he called it asp-route-projectType; I did bookCategory. It's in Homecontroller'-->
+
+
+<!-- That special if is same as this below:
+if (ViewBag.SelectedType == b)
+{
+    return "btn-primary"
+}
+else
+{
+    return "btn-outline-secondary"
+} -->

@@ -34,6 +34,11 @@ namespace Bookstore
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>(); //had me add Using to top
+
+            services.AddRazorPages(); //to be able to use razerpages
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,15 +50,34 @@ namespace Bookstore
             }
 
             app.UseStaticFiles(); //corresponds to wwwroot
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
+       //**3 possibilities: either get category + page; just category; or just page, and still can get to the right page**
             {
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapDefaultControllerRoute(); //this is a summarized version of what we had done before with name: default; pattern, etc.
-                });
+                endpoints.MapControllerRoute("categorypage",
+                    "{bookCategory}/Page{pageNum}",
+                    new { Controller = "Home", action = "Index" }); //w/in {} means it is info that'll be passed in
+
+                endpoints.MapControllerRoute( //endpoints are executed in order
+                    name: "Paging", //note can remove "name", "pattern", "defaults" to look like other two
+                    pattern: "page{pageNum}", //"PageNum" comes from HomeController; take inside {} and remove that from URL; before is what will display
+                    defaults: new { Controller = "Home", action = "Index", pageNum = 1}); //default is page 1
+
+                endpoints.MapControllerRoute("category",
+                    "{bookCategory}",
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                //(endpoints.MapControllerRoute
+                //    ("category",
+                //    "{bookCategory}",     //if that's all we receive is the "category"
+                //    new { Controller = "Home", action = "Index", pageNum = 1});
+                //if they just click on "category" then default to 1st page of that category
+
+                endpoints.MapDefaultControllerRoute(); //this is a summarized version of what we had done before with name: default; pattern, etc.
+
+                endpoints.MapRazorPages(); //add this for razor pages
             });
         }
     }

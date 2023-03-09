@@ -1,0 +1,39 @@
+﻿@{
+}
+@model Book
+<!-- added this above to pull from the index page where we reference "Book and call is model at top" -->
+
+<div class="card card-outline-primary m-1 p-1">
+    <div class="bg-light p-1">
+        <h3>
+            @Model.Title
+            <span class="badge badge-pill badge-primary bg-dark" style="float:right">
+                Price: @Model.Price
+            </span>
+        </h3>
+    </div>
+
+    <ul>
+        <li>Author: @Model.Author</li>
+        <li>Publisher: @Model.Publisher</li>
+        <li>ISBN: @Model.Isbn</li>
+        <li>Classification: @Model.Classification</li>
+        <li>Category: @Model.Category</li>
+        <li>Page Count: @Model.PageCount pages</li>
+    </ul>
+
+    <form method="post" asp-page="/BuyBook"> <!--in video it is "/Donate". This is the Razor Page that created-->
+        
+        <input type="hidden" asp-for="@Model.BookId" /> <!--hidden field to pass BookID as well-->
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
+        
+        <span class="card-text">
+            <button type="submit" class="btn btn-success btn-sm float-end">
+                Buy Book<span class="badge">Fast Shipping</span>
+            </button>
+        </span>
+
+    </form>
+
+</div>
+

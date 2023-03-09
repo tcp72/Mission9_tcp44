@@ -34,7 +34,7 @@ namespace Bookstore.Infrastructure
         public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; }
         public string PageClassNormal { get; set; }
-        public string PageClassSelected { get; set; }
+        public string PageClassSelected { get; set; } //what is looks like if selected
 
         public override void Process (TagHelperContext thc, TagHelperOutput tho) //override = instead of using parent class portion, use this
         {
@@ -49,11 +49,11 @@ namespace Bookstore.Infrastructure
                 tb.InnerHtml.Append(i.ToString());
 
                 //added next 4 lines from bootstrap part of book
-                if (PageClassesEnabled)
-                {
-                    tb.AddCssClass(PageClass);
-                    tb.AddCssClass(i == PageBlah.CurrentPage
-                        ? PageClassSelected : PageClassNormal);
+                if (PageClassesEnabled) //this is saying, "if true"
+                { //if i is current page ? is saying "then" use page class selected, else use page class normal
+                    tb.AddCssClass(PageClass); 
+                    tb.AddCssClass(i == PageBlah.CurrentPage // ? is saying "then" use page class selected, else use page class normal
+                        ? PageClassSelected : PageClassNormal); //: is saying else
                 }
 
 
