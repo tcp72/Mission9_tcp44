@@ -31,8 +31,8 @@ namespace Bookstore.Models
         }
         public Double CalculateTotal()
         {
-            double sum = Items.Sum(x => x.Quantity * 25); //this is saying that will pay 25 each time
-            return sum;                                   //buy a book**different for assignment!!
+            double sum = Items.Sum(x => x.Quantity * x.Book.Price); //this is saying that will pay 25 each time
+            return sum;         //quantity * price for each individual. Sum gets each unit and sums it
         }
     }
 

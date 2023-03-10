@@ -24,7 +24,7 @@
 
     <form method="post" asp-page="/BuyBook"> <!--in video it is "/Donate". This is the Razor Page that created-->
         
-        <input type="hidden" asp-for="@Model.BookId" /> <!--hidden field to pass BookID as well-->
+        <input type="hidden" asp-for="@Model.BookID" /> <!--hidden field to pass BookID as well-->
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
         
         <span class="card-text">

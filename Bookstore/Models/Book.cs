@@ -8,12 +8,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bookstore.Models
 {
-    public partial class Book
+    public class Book
     {
         [Key]
         [Required]
-        public long BookId { get; set; }
-        public object BookID { get; internal set; }
+        public long BookID { get; set; }
+
+        //public object BookID { get; internal set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string Publisher { get; set; }

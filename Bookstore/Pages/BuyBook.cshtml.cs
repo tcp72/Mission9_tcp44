@@ -27,7 +27,7 @@ namespace Bookstore.Pages
         public IActionResult OnPost(int bookID, string returnUrl) //this is coming from the BookSummary
                                                 //in "Shared" BookSUmmarey line 27 or so atModel
         {
-            Book b = repo.Books.FirstOrDefault(x => x.BookId == bookID);
+            Book b = repo.Books.FirstOrDefault(x => x.BookID == bookID);
 
             //Get from the session if have algo stored. Stored in type Basket, named "basket", else, new
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
