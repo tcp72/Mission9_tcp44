@@ -34,11 +34,16 @@ namespace Bookstore
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>(); //had me add Using to top
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();//when have ipurchrep, referring to efpurrep
 
             services.AddRazorPages(); //to be able to use razerpages
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            //when see the <basket> passed in, will go get a new basket (remember SBasket is inherited and comes from SessioNBasket
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //references SessionBasket
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

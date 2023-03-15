@@ -20,5 +20,6 @@ namespace Bookstore.Models
         }
 
         public DbSet<Book> Books { get; set; } //removed "virtual"
+        public DbSet<Purchase> Purchase { get; set; } //called table "Purchase"
     }
 }

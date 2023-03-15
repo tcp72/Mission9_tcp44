@@ -5,20 +5,32 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
     <div class="bg-dark text-white p-2">
-        <span class="navbar-brand ml-2">BOOK STORE</span>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col navbar-brand">BOOK STORE</div>
+                <div class="col-6 text-right">
+                    <vc:cart-summary /> <!--do we want to go to the checkout view?-->
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="row m-1 p-1"> <!--margin 1 padding 1-->
 
-        <div id="types" class="col-3"> <!--3 columns here-->
-            <vc:types></vc:types> 
+    <div class="row m-1 p-1">
+        <!--margin 1 padding 1-->
+
+        <div id="types" class="col-3">
+            <!--3 columns here-->
+            <vc:types></vc:types>
         </div>
 
-        <div class="col-9"> <!--9 columns width here-->
+        <div class="col-9">
+            <!--9 columns width here-->
             @RenderBody()
         </div>
     </div>

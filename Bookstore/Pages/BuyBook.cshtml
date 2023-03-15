@@ -27,19 +27,30 @@
                 <td>@i.Book.Title</td>
                 <td>@i.Quantity</td>
                 <td>@i.Book.Price</td> <!--changed this for price-->
-                <td>@(i.Quantity * i.Book.Price)</td>
-            </tr>
-        }
-    </tbody>
+                <td>@((i.Quantity * i.Book.Price).ToString("c"))</td> <!--this gives currency formatting-->
 
-    <tfoot>
-        <tr>
-            <td colspan="3">Total:</td>
-            <td>@Model.basket.CalculateTotal().ToString("c")</td>
-            <!--CalculateTotal from the instance of basket in Basket. ToString("c")formats as currency-->
-        </tr>
-    </tfoot>
+                <td class="text-center">
+                    <!--make a form so can pass more info-->
+                    <!--hidden-; usually post to controller but here posting to RazorPage and associated model-->
+                                <form method="post" asp-page-handler="Remove"> <!--this makes it remove-->
+                                    <input type="hidden" name="BookID" value="@i.Book.BookID" />
+                                    <input type="hidden" name="returnUrl" value="Model.ReturnUrl" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Total:</td>
+                        <td>@Model.basket.CalculateTotal().ToString("c")</td>
+                        <!--CalculateTotal from the instance of basket in Basket. ToString("c")formats as currency-->
+            </tr>
+            </tfoot>
 </table>
 <div>
     <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+    <a class="btn btn-primary" asp-controller="Purchase" asp-action="Checkout" >Checkout</a>
 </div> <!--getting ReturnUrl from the BuyBOok.cshtml.cs-->
